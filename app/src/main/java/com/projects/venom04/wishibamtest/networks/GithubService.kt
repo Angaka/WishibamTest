@@ -8,7 +8,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Headers
-import retrofit2.http.Query
+import retrofit2.http.Path
 
 /**
  * Created by Venom on 31/05/2018.
@@ -27,6 +27,6 @@ interface GithubService {
     }
 
     @Headers("Content-Type: application/json")
-    @GET("torvalds/linux/commits")
-    fun getAllCommitsByAuthorAndRepo(@Query("owner") owner: String, @Query("repo") repo: String) : Observable<JsonArray>
+    @GET("{owner}/{repo}/commits")
+    fun getAllCommitsByAuthorAndRepo(@Path("owner") owner: String, @Path("repo") repo: String) : Observable<JsonArray>
 }

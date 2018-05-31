@@ -31,9 +31,16 @@ class MainActivity : AppCompatActivity(), MainView {
 
         mMainPresenter = MainPresenter(this)
         mMainPresenter.getAllCommits()
+
+        swipeRefreshLayout_commits.isRefreshing = true
+        swipeRefreshLayout_commits.setOnRefreshListener {
+            swipeRefreshLayout_commits.isRefreshing = true
+            mMainPresenter.getAllCommits()
+        }
     }
 
     override fun onSuccess(commits: List<Commit>) {
+        swipeRefreshLayout_commits.isRefreshing = false
         recyclerView_commits.adapter = CommitsAdapter(commits, {
             val intent = Intent(Intent.ACTION_VIEW, it.toUri())
             startActivity(intent)
@@ -41,6 +48,7 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun onError(error: String?) {
+        swipeRefreshLayout_commits.isRefreshing = false
         if (error != null) {
             if (BuildConfig.DEBUG)
                 Log.e(TAG, error)
