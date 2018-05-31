@@ -1,7 +1,8 @@
-package com.projects.venom04.wishibamtest
+package com.projects.venom04.wishibamtest.mvp.views.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.projects.venom04.wishibamtest.R
 
 class MainActivity : AppCompatActivity() {
 
